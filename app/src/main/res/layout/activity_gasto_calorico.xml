@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".GastoCaloricoActivity">
+
+    <androidx.cardview.widget.CardView
+        android:layout_margin="20dp"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        card_view:cardBackgroundColor="@color/blue_primary"
+        android:layout_marginHorizontal="15dp"
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        card_view:cardCornerRadius="4dp"
+        card_view:cardElevation="3dp">
+
+        <LinearLayout
+            android:layout_margin="10dp"
+            android:layout_marginHorizontal="15dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_margin="10dp"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/white"
+                card_view:errorTextAppearance="@style/error_appearance"
+                card_view:placeholderTextColor="@color/white"
+                card_view:hintTextColor="@color/white"
+                android:id="@+id/tilEmail">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:hint="Género"
+                    android:text="Masculino"
+                    android:clickable="false"
+                    android:cursorVisible="false"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:inputType="textEmailAddress"
+                    android:textColor="@color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <GridLayout
+                android:columnCount="3"
+
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_margin="10dp"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/white"
+                    card_view:errorTextAppearance="@style/error_appearance"
+                    card_view:placeholderTextColor="@color/white"
+                    card_view:hintTextColor="@color/white"
+                    android:id="@+id/tilEdad">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:hint="Edad"
+                        android:text="21 años"
+                        android:clickable="false"
+                        android:cursorVisible="false"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:inputType="textEmailAddress"
+                        android:textColor="@color/white"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_margin="10dp"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/white"
+                    card_view:errorTextAppearance="@style/error_appearance"
+                    card_view:placeholderTextColor="@color/white"
+                    card_view:hintTextColor="@color/white"
+                    android:id="@+id/tilAltura">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:hint="Altura"
+                        android:text="169 cm"
+                        android:clickable="false"
+                        android:cursorVisible="false"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:inputType="textEmailAddress"
+                        android:textColor="@color/white"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_margin="10dp"
+                    android:layout_width="140dp"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/white"
+                    card_view:errorTextAppearance="@style/error_appearance"
+                    card_view:placeholderTextColor="@color/white"
+                    card_view:hintTextColor="@color/white"
+                    android:id="@+id/tilPeso">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:hint="Peso"
+                        android:text="62 kg"
+                        android:clickable="false"
+                        android:cursorVisible="false"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:inputType="textEmailAddress"
+                        android:textColor="@color/white"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+            </GridLayout>
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/white"
+                android:text="Tu objetivo de entrenamiento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <Spinner
+                android:id="@+id/spinnerObjetivo"
+                android:layout_margin="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/white"
+                android:text="Entrenamientos a la semana"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <Spinner
+                android:id="@+id/spinnerEntrenamientoSemana"
+                android:layout_margin="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_calcular"
+        android:layout_gravity="center_horizontal"
+        android:text="Calcular"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textAllCaps="false"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/gray_secondary"/>
+
+    <TextView
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/gasto_calorico_ejemplo_1"
+        android:textColor="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:layout_marginLeft="20dp"
+        android:text="@string/gasto_calorico_ejemplo_2"
+        android:textColor="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:layout_marginLeft="20dp"
+        android:text="@string/gasto_calorico_ejemplo_3"
+        android:textColor="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+</LinearLayout>

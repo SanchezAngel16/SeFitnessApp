@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "955032380838",
+    "project_id": "se-fitness",
+    "storage_bucket": "se-fitness.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:955032380838:android:9464a8f9d8af1ea23b1b67",
+        "android_client_info": {
+          "package_name": "com.ingenieriasoftware.sefitness"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "955032380838-gkat3l1lh67u90db7pi3v0699n4gr724.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4jMe5XdLJpeRGOlHe2TAx1mYEphP4dKY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "955032380838-gkat3l1lh67u90db7pi3v0699n4gr724.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
