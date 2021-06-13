@@ -120,6 +120,50 @@
                         android:layout_height="wrap_content"
                         android:textColorHint="@color/white"
                         card_view:errorTextAppearance="@style/error_appearance"
+                        android:id="@+id/tilPadecimientos">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_padecimientos"
+                            android:hint="Padecimientos"
+                            android:textColorHint="@color/white"
+                            android:inputType="textMultiLine"
+                            android:minLines="3"
+                            android:textColor="@color/white"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        card_view:hintTextColor="@color/white"
+                        card_view:placeholderTextColor="@color/white"
+                        android:layout_margin="10dp"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:textColorHint="@color/white"
+                        card_view:errorTextAppearance="@style/error_appearance"
+                        android:id="@+id/tilObjetivos">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_objetivos"
+                            android:hint="Objetivos"
+                            android:textColorHint="@color/white"
+                            android:inputType="textMultiLine"
+                            android:minLines="3"
+                            android:textColor="@color/white"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        card_view:hintTextColor="@color/white"
+                        card_view:placeholderTextColor="@color/white"
+                        android:layout_margin="10dp"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:textColorHint="@color/white"
+                        card_view:errorTextAppearance="@style/error_appearance"
                         android:id="@+id/tilContrasenya">
 
                         <com.google.android.material.textfield.TextInputEditText

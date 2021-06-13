@@ -46,6 +46,10 @@ public class Registro extends AppCompatActivity {
     private TextInputEditText mContrasenya;
     private TextInputLayout mLytConfirmacionContrasenya;
     private TextInputEditText mConfirmacionContrasenya;
+    private TextInputLayout mLytPadecimientos;
+    private TextInputEditText mPadecimientos;
+    private TextInputLayout mLytObjetivos;
+    private TextInputEditText mObjetivos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,6 +109,10 @@ public class Registro extends AppCompatActivity {
         mContrasenya = findViewById(R.id.et_contrasenya);
         mLytConfirmacionContrasenya = findViewById(R.id.tilConfirmacionContrasenya);
         mConfirmacionContrasenya = findViewById(R.id.et_contrasenya_2);
+        mLytPadecimientos = findViewById(R.id.tilPadecimientos);
+        mPadecimientos = findViewById(R.id.et_padecimientos);
+        mLytObjetivos = findViewById(R.id.tilObjetivos);
+        mObjetivos = findViewById(R.id.et_objetivos);
 
         mFechaNacimiento.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -143,7 +151,9 @@ public class Registro extends AppCompatActivity {
         String genero = mGenero.getSelectedItem().toString();
         String fechaNacimiento = mFechaNacimiento.getText().toString();
         String contrasenya = mContrasenya.getText().toString();
-        Usuario nuevoUsuario = new Usuario(nombre, "Cliente", genero, correo, fechaNacimiento);
+        String padecimientos = mPadecimientos.getText().toString();
+        String objetivos = mObjetivos.getText().toString();
+        Usuario nuevoUsuario = new Usuario(nombre, "Cliente", genero, correo, fechaNacimiento, padecimientos, objetivos);
         mAuth.createUserWithEmailAndPassword(correo, contrasenya)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -202,7 +212,9 @@ public class Registro extends AppCompatActivity {
             !validarCampo(mCorreo, mLytCorreo, "Escriba su correo electrónico") |
             !validarCampo(mFechaNacimiento, mLytFecha, "Escriba su fecha de nacimiento") |
             !validarCampo(mContrasenya, mLytContrasenya, "Escriba su contraseña") |
-            !validarCampo(mConfirmacionContrasenya, mLytConfirmacionContrasenya, "Escriba la confirmación de su contraseña")){
+            !validarCampo(mConfirmacionContrasenya, mLytConfirmacionContrasenya, "Escriba la confirmación de su contraseña") |
+            !validarCampo(mPadecimientos, mLytPadecimientos, "Escriba sus padecimientos") |
+            !validarCampo(mObjetivos, mLytObjetivos, "Escriba sus objetivos")){
             return false;
         }
         return true;

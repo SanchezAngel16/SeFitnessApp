@@ -10,34 +10,73 @@ public class Usuario {
     private String genre;
     private String email;
     private String birthDate;
+    private String rutinaAsignada;
+    private String dietaAsignada;
+    private String ailments;
+    private String status;
+    private boolean solicitudBaja;
+    private String objetivos;
 
-    public boolean isRutinaAsignada() {
-        return rutinaAsignada;
-    }
-
-    public void setRutinaAsignada(boolean rutinaAsignada) {
-        this.rutinaAsignada = rutinaAsignada;
-    }
-
-    public boolean isDietaAsignada() {
-        return dietaAsignada;
-    }
-
-    public void setDietaAsignada(boolean dietaAsignada) {
-        this.dietaAsignada = dietaAsignada;
-    }
-
-    private boolean rutinaAsignada;
-    private boolean dietaAsignada;
-
-    public Usuario(String name, String role, String genre, String email, String birthDate){
+    public Usuario(String name, String role, String genre, String email, String birthDate, String ailments, String objetivos){
         this.name = name;
         this.role = role;
         this.genre = genre;
         this.email = email;
         this.birthDate = birthDate;
-        this.rutinaAsignada = false;
-        this.dietaAsignada = false;
+        this.rutinaAsignada = "";
+        this.dietaAsignada = "";
+        this.status = "Pendiente";
+        this.ailments = ailments;
+        this.objetivos = objetivos;
+        this.solicitudBaja = false;
+    }
+
+    public String getObjetivos() {
+        return objetivos;
+    }
+
+    public void setObjetivos(String objetivos) {
+        this.objetivos = objetivos;
+    }
+
+    public String getAilments() {
+        return ailments;
+    }
+
+    public void setAilments(String ailments) {
+        this.ailments = ailments;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public boolean getSolicitudBaja() {
+        return solicitudBaja;
+    }
+
+    public void setSolicitudBaja(boolean solicitudBaja) {
+        this.solicitudBaja = solicitudBaja;
+    }
+
+    public String isRutinaAsignada() {
+        return rutinaAsignada;
+    }
+
+    public void setRutinaAsignada(String rutinaAsignada) {
+        this.rutinaAsignada = rutinaAsignada;
+    }
+
+    public String isDietaAsignada() {
+        return dietaAsignada;
+    }
+
+    public void setDietaAsignada(String dietaAsignada) {
+        this.dietaAsignada = dietaAsignada;
     }
 
     public String getUid() {
@@ -98,6 +137,10 @@ public class Usuario {
         firebaseObject.put("birthDate", this.birthDate);
         firebaseObject.put("rutinaAsignada", this.rutinaAsignada);
         firebaseObject.put("dietaAsignada", this.dietaAsignada);
+        firebaseObject.put("ailments", this.ailments);
+        firebaseObject.put("objetivos", this.objetivos);
+        firebaseObject.put("status", this.status);
+        firebaseObject.put("solicitudBaja", this.solicitudBaja);
         return firebaseObject;
     }
 
