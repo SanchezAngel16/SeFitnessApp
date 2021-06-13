@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
@@ -55,73 +56,41 @@ public class RutinasActivity extends Activity {
                         DocumentSnapshot document = task.getResult();
                         if (document.exists()) {
                             String currentRoutineId = document.getData().get("rutinaAsignada").toString();
-                            DocumentReference assignedRoutine = db.collection("users")
-                                    .document(mCurrentUser.getUid())
-                                    .collection("routine")
-                                    .document(currentRoutineId);
-                            assignedRoutine.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                                @Override
-                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                    if (task.isSuccessful()) {
-                                        DocumentSnapshot document = task.getResult();
-                                        if (document.exists()) {
-                                            Log.d("LOG-RUTINAS", "DocumentSnapshot data: " + document.getData().get("Nombre"));
-                                            String sRoutineName = document.getData().get("Nombre").toString();
-                                            tvRoutineName.setText(sRoutineName);
-                                            tvAssignedRoutineDate.setText("Asignada el " +  Utils.getFormattedDate(Long.valueOf(document.getData().get("FechaAsignacion").toString())));
-                                            ArrayList<String> exercises = (ArrayList<String>) document.getData().get("Ejercicios");
-                                            ArrayList<String> days = (ArrayList<String>) document.getData().get("Dias");
-                                            if(exercises != null){
-                                                generateExercisesList(exercises, days);
-                                                listDataHeader.add("Observaciones");
-                                                List<String> observaciones = new ArrayList<>();
-                                                observaciones.add(document.getData().get("Observaciones").toString());
-                                                listDataChild.put(listDataHeader.get(0), observaciones);
-                                                addExerciseToList();
+                            if(!TextUtils.isEmpty(currentRoutineId)){
+                                DocumentReference assignedRoutine = db.collection("users")
+                                        .document(mCurrentUser.getUid())
+                                        .collection("routine")
+                                        .document(currentRoutineId);
+                                assignedRoutine.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                        if (task.isSuccessful()) {
+                                            DocumentSnapshot document = task.getResult();
+                                            if (document.exists()) {
+                                                Log.d("LOG-RUTINAS", "DocumentSnapshot data: " + document.getData().get("Nombre"));
+                                                String sRoutineName = document.getData().get("Nombre").toString();
+                                                tvRoutineName.setText(sRoutineName);
+                                                tvAssignedRoutineDate.setText("Asignada el " +  Utils.getFormattedDate(Long.valueOf(document.getData().get("FechaAsignacion").toString())));
+                                                ArrayList<String> exercises = (ArrayList<String>) document.getData().get("Ejercicios");
+                                                ArrayList<String> days = (ArrayList<String>) document.getData().get("Dias");
+                                                if(exercises != null){
+                                                    generateExercisesList(exercises, days);
+                                                    listDataHeader.add("Observaciones");
+                                                    List<String> observaciones = new ArrayList<>();
+                                                    observaciones.add(document.getData().get("Observaciones").toString());
+                                                    listDataChild.put(listDataHeader.get(0), observaciones);
+                                                    addExerciseToList();
+                                                }
+                                            } else {
+                                                Log.d("LOG-RUTINAS", "No such document");
                                             }
-                                            /*
-                                            assignedRoutine.collection("exercises")
-                                                    .get()
-                                                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                                        @Override
-                                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                                            if (task.isSuccessful()) {
-                                                                listDataHeader = new ArrayList<String>();
-                                                                listDataChild = new HashMap<String, List<String>>();
-                                                                int cont = 0;
-                                                                for (QueryDocumentSnapshot ejercicioObject : task.getResult()) {
-
-                                                                    Log.d("LOG-RUTINAS", ejercicioObject.getId() + " => " + ejercicioObject.getData().get("Nombre"));
-
-                                                                    listDataHeader.add(ejercicioObject.getData().get("Nombre").toString());
-                                                                    List<String> ejercicio = new ArrayList<String>();
-                                                                    ejercicio.add("Tipo de ejercicio: " + ejercicioObject.getData().get("Tipo").toString());
-                                                                    ejercicio.add("Repeticiones: " + ejercicioObject.getData().get("Repeticiones").toString());
-                                                                    ejercicio.add("Series: " + ejercicioObject.getData().get("Series").toString());
-                                                                    ejercicio.add("Intensidad: " + ejercicioObject.getData().get("Intensidad").toString());
-                                                                    ejercicio.add("Categoría: " + ejercicioObject.getData().get("Categoria").toString());
-                                                                    ejercicio.add("Días: " + Utils.getDaysFromFirebaseFormat(ejercicioObject.getData().get("Dias").toString()));
-                                                                    listDataChild.put(listDataHeader.get(cont), ejercicio);
-                                                                    cont++;
-                                                                }
-                                                                listDataHeader.add("Observaciones");
-                                                                List<String> observaciones = new ArrayList<>();
-                                                                observaciones.add(document.getData().get("Observaciones").toString());
-                                                                listDataChild.put(listDataHeader.get(cont), observaciones);
-                                                                addExerciseToList();
-                                                            } else {
-                                                                Log.w("LOG-RUTINAS", "Error getting documents.", task.getException());
-                                                            }
-                                                        }
-                                                    });*/
                                         } else {
-                                            Log.d("LOG-RUTINAS", "No such document");
+                                            Log.d("LOG-RUTINAS", "get failed with ", task.getException());
                                         }
-                                    } else {
-                                        Log.d("LOG-RUTINAS", "get failed with ", task.getException());
                                     }
-                                }
-                            });
+                                });
+                            }
+
                         } else {
                         }
                     } else {
