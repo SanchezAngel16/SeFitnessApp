@@ -46,6 +46,7 @@ public class CitasActivity extends AppCompatActivity {
         listDataChild = new HashMap<String, List<String>>();
         if(mCurrentUser != null){
             db.collection("users").document(mCurrentUser.getUid()).collection("citas")
+                    .whereEqualTo("estado", "Pendiente")
                     .orderBy("fechaInMillis")
                     .get()
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
