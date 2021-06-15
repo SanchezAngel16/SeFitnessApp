@@ -17,14 +17,18 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import org.jetbrains.annotations.NotNull;
+
 public class InicioClienteActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
+    private FirebaseFirestore mFirestoreInstance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inicio_cliente);
         mAuth = FirebaseAuth.getInstance();
+        mFirestoreInstance = FirebaseFirestore.getInstance();
 
         LinearLayout lytPerfilUsuario = findViewById(R.id.lyt_perfil_usuario);
         lytPerfilUsuario.setOnClickListener(view -> startActivity(new Intent(InicioClienteActivity.this, PerfilUsuarioActivity.class)));
@@ -81,6 +85,22 @@ public class InicioClienteActivity extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null) {
             Log.d("LOG-REGISTRO","Usuario loggeado: " + currentUser.getEmail());
+            mFirestoreInstance.collection("users").document(currentUser.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull @NotNull Task<DocumentSnapshot> task) {
+                    if(task.isSuccessful()){
+                        DocumentSnapshot currentFirebaseUser = task.getResult();
+                        String estatus = currentFirebaseUser.get("status").toString();
+                        if(estatus.equals("Baja")){
+                            Intent mIntent = new Intent(InicioClienteActivity.this, LoginActivity.class);
+                            Toast.makeText(InicioClienteActivity.this, "Esta cuenta está dada de baja", Toast.LENGTH_SHORT).show();
+                            mIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            mAuth.signOut();
+                            startActivity(mIntent);
+                        }
+                    }
+                }
+            });
         }
         else {
             Log.d("LOG-REGISTRO", "Usuario no loggeado");

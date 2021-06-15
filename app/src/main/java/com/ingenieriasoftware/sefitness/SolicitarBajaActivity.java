@@ -53,6 +53,7 @@ public class SolicitarBajaActivity extends AppCompatActivity {
                                 public void onSuccess(Void aVoid) {
                                     HashMap<String, String> solicitud = new HashMap<>();
                                     solicitud.put("motivo", motivo.getText().toString());
+                                    solicitud.put("estado", "Pendiente");
                                     db.collection("solicitudes").document(mAuth.getCurrentUser().getUid())
                                             .set(solicitud)
                                             .addOnSuccessListener(new OnSuccessListener<Void>() {
