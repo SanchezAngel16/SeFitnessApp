@@ -72,14 +72,17 @@ public class RutinasActivity extends Activity {
                                                 tvRoutineName.setText(sRoutineName);
                                                 tvAssignedRoutineDate.setText("Asignada el " +  Utils.getFormattedDate(Long.valueOf(document.getData().get("FechaAsignacion").toString())));
                                                 ArrayList<String> exercises = (ArrayList<String>) document.getData().get("Ejercicios");
+                                                Log.d("LOG-RUTINAS", exercises.size() + "");
                                                 ArrayList<String> days = (ArrayList<String>) document.getData().get("Dias");
                                                 if(exercises != null){
-                                                    generateExercisesList(exercises, days);
+                                                    listDataHeader = new ArrayList<String>(exercises.size());
+                                                    listDataChild = new HashMap<String, List<String>>(exercises.size());
                                                     listDataHeader.add("Observaciones");
                                                     List<String> observaciones = new ArrayList<>();
                                                     observaciones.add(document.getData().get("Observaciones").toString());
                                                     listDataChild.put(listDataHeader.get(0), observaciones);
                                                     addExerciseToList();
+                                                    generateExercisesList(exercises, days);
                                                 }
                                             } else {
                                                 Log.d("LOG-RUTINAS", "No such document");
@@ -110,8 +113,9 @@ public class RutinasActivity extends Activity {
     }
 
     private void generateExercisesList(ArrayList<String> exercises, ArrayList<String> days){
-        listDataHeader = new ArrayList<String>(exercises.size());
-        listDataChild = new HashMap<String, List<String>>(exercises.size());
+
+        Log.d("LOG_RUTINAS", listDataHeader.size() + "->Tamaño header");
+
         for(int i = 0; i < exercises.size(); i++){
             int cont = i;
             db.collection("exercises").document(exercises.get(i)).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -119,7 +123,9 @@ public class RutinasActivity extends Activity {
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                     DocumentSnapshot ejercicioObject = task.getResult();
                     Log.d("LOG-RUTINAS", ejercicioObject.getId() + " => " + ejercicioObject.getData().get("Nombre"));
-                    listDataHeader.add(cont, ejercicioObject.getData().get("Nombre").toString());
+                    int headerListSize = listDataHeader.size();
+                    Log.d("LOG-RUTINAS", String.valueOf(headerListSize));
+                    listDataHeader.add(headerListSize-1, ejercicioObject.getData().get("Nombre").toString());
                     List<String> ejercicio = new ArrayList<String>();
                     ejercicio.add("Tipo de ejercicio: " + ejercicioObject.getData().get("Tipo").toString());
                     ejercicio.add("Repeticiones: " + ejercicioObject.getData().get("Repeticiones").toString());
@@ -127,7 +133,7 @@ public class RutinasActivity extends Activity {
                     ejercicio.add("Intensidad: " + ejercicioObject.getData().get("Intensidad").toString());
                     ejercicio.add("Categoría: " + ejercicioObject.getData().get("Categoria").toString());
                     ejercicio.add("Días: " + Utils.getDaysFromFirebaseFormat(days.get(cont)));
-                    listDataChild.put(listDataHeader.get(cont), ejercicio);
+                    listDataChild.put(listDataHeader.get(headerListSize-1), ejercicio);
                     addExerciseToList();
                 }
             });

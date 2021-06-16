@@ -129,7 +129,7 @@ public class Registro extends AppCompatActivity {
             }
         });
 
-        Button btnIngresar = findViewById(R.id.btn_ingresar);
+        Button btnIngresar = findViewById(R.id.btn_mandar);
         btnIngresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
