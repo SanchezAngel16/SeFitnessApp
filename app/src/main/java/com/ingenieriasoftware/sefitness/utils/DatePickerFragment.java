@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.DatePicker;
 
 import java.util.Calendar;
+import java.util.Date;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
@@ -27,11 +28,16 @@ public class DatePickerFragment extends DialogFragment {
     @Override
     @NonNull
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+        long sixteenYearsDifference = 504911232000L;
+        long sixteenYearsAgoInMillis = Calendar.getInstance().getTimeInMillis() - sixteenYearsDifference;
         final Calendar c = Calendar.getInstance();
+        c.setTimeInMillis(sixteenYearsAgoInMillis);
         int year = c.get(Calendar.YEAR);
         int month = c.get(Calendar.MONTH);
         int day = c.get(Calendar.DAY_OF_MONTH);
 
-        return new DatePickerDialog(getActivity(), listener, year, month, day);
+        DatePickerDialog d = new DatePickerDialog(getActivity(), listener, year, month, day);
+        d.getDatePicker().setMaxDate(sixteenYearsAgoInMillis);
+        return d;
     }
 }
